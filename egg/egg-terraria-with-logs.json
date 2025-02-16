@@ -5,17 +5,17 @@
         "update_url": null
     },
     "exported_at": "2022-02-08T22:40:21+08:00",
-    "name": "Terraria (ARM)",
-    "author": "megat@alzhahir.com",
-    "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game. Available for ARM systems as well as x64 systems!",
+    "name": "Terraria (ARM) with logging",
+    "author": "notamericankestrel@gmail.com",
+    "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game. Available for ARM systems as well as x64 systems! Now with logging!",
     "features": null,
     "images": [
-        "ghcr.io\/alzhahir\/terraria:main"
+        "ghcr.io\/notamericankestrel\/terraria:main"
     ],
     "file_denylist": [],
     "startup": "mono .\/TerrariaServer.exe -config serverconfig.txt",
     "config": {
-        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        \"password\": \"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\"\r\n}",
         "logs": "{}",
         "stop": "exit"
@@ -78,6 +78,15 @@
             "description": "Server MOTD",
             "env_variable": "SERVER_MOTD",
             "default_value": "Welcome!",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128"
+        },
+        {
+            "name": "Password",
+            "description": "Server Password",
+            "env_variable": "SERVER_PASSWORD",
+            "default_value": "YouNeedToChangeThis",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:128"
