@@ -16,8 +16,5 @@ dotnet --version
 MODIFIED_STARTUP=$(echo -e ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')
 echo -e ":/home/container$ ${MODIFIED_STARTUP}"
 
-# Start the Terraria server in a screen session and log output
-screen -dmS terraria_server bash -c "${MODIFIED_STARTUP} | tee -a $LOG_FILE"
-
-# Attach to the screen session to display output
-exec screen -r terraria_server
+# Start the Terraria server, log output, and send it to both file & console
+exec ${MODIFIED_STARTUP} 2>&1 | tee -a "$LOG_FILE"
